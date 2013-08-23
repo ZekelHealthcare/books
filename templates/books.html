@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>Search</title>
 <script language="javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script language="javascript">
 $(window).load(function(){
@@ -8,15 +9,28 @@ $(window).load(function(){
 		var items = [];
 
 		$.each(data.titles, function(key, val) {
-			items.push('<p>' + key + ' => ' + val + '</p>');
+			var book_data = val[0];
+			var author_data = book_data.author_data;
+			var authors = "";
+			$.each(author_data, function(author){
+				authors += " " + author_data[author].name;
+			});
+			items.push('<tr><td>' + key + '</td><td>' + authors + '</td></tr>');
 		});
 
-		$("body").append(items.join(''));
-		
+		$("#book_table").append(items.join(''));
+	
+		var search_params = location.search;
+		if(search_params){
+			$("#params").text(decodeURI("yes"));
+		}
 	});
 });
 </script>
 </head>
 <body>
+<div id="params"></div>
+<table border=1 id="book_table">
+</table>
 </body>
 </html>
