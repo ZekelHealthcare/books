@@ -1,0 +1,18 @@
+#!/usr/bin/env python
+#
+# Converts a book catalog file to json.
+#
+
+from sys import argv
+from getopt import getopt, GetoptError
+from drcbooks import load_catalog
+import json
+
+
+(opts, args) = getopt(argv[1:], "", [])
+
+filename = args[0]
+outfilename = args[1]
+
+catalog = load_catalog(filename)
+json.dump(catalog, open(outfilename, "w"))
