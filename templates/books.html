@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script language="javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script language="javascript">
+$(window).load(function(){
+	$.getJSON("/user/catalog.json", function(data) {
+		var items = [];
+
+		$.each(data.titles, function(key, val) {
+			items.push('<p>' + key + ' => ' + val + '</p>');
+		});
+
+		$("body").append(items.join(''));
+		
+	});
+});
+</script>
+</head>
+<body>
+</body>
+</html>
